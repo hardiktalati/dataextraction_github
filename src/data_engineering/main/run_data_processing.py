@@ -8,33 +8,20 @@ def run_data_processing(process_name: str, write_database: str, environment: str
 
     This is the entry point of the project, all different dags gets executed from this function.
     Whilst building the pipeline, this script gets copied at shared location in databricks and
-    it is called in datafactory jobs with relevant parameters.
+    and it can be scheduled using databricks scheduler. Parameters from this notebook would be passed
+    to another runscript to accomodate the dbutils library specific to datbaricks.
 
-    Data is divided in below fashion
+    When the script gets executed below steps takes place
 
-    - raw - apply schema to files
-    - historic - apply schema to files ( one off historic load , e.g. sap bw data)
-    - consolidated - makes reusable table with some amount of transformation which can be common among business
-    - feature - IPM specific transformation i.e. data that goes into reporting or modelling
+    1). Creates dataset (database if it does not exist).
+    2). Executes the pipeline or multiple pipelines.
+    3). Writes the data to the google big query.
 
-    Currently it calls below parameters (i.e. different processes)
-
-    - Raw manual files
-    - Historic layer
-    - Daily view consolidated
-    - Weekly stock consolidated
-    - Capacity control feature
-    - Finance planner feature
-    - Prophet feature
-    - Supply planner consolidated (DOS and actuals)
-    - supply planner Feature (DOS and actuals)
-
-    All above processes gets called by a function, and written to hive table via the list of tables
-    passed from constant files. All hive tables have schema and they get overwritten on every run.
-
-    :param process_name: name of the process - i.e. feature layer, consolidated layer etc
+    :param process_name: name of the process - i.e. feature layer, consolidated layer etc. It gets picked up from the dags_config and is passed as a parameter.
+    :param write_database: Name of the dataset where it needs to write.
+    :param environment: Project ID details.
     :return: This function returns None- as it is executes dag and writes data to
-    the hive tables. Further information could be found in the relevant sections.
+    the google big query. Further information could be found in the relevant sections.
     """
     # LOG.info("running data processing")
     process_dict = PROCESSES

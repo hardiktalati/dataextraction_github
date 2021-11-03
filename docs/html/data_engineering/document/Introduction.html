@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Data Extraction GithubAPI v0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="Welcome to project template Technical documentation" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Data Extraction GithubAPI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Index:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci-cd">CI-CD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#end-to-end-flow">End to End Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main - Execution script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dag.html">Dags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraction.html">Extraction and transformation process</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Data Extraction GithubAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/data_engineering/document/Introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p>The project tries to mimic real life data engineering process. In this process it uses github api to extract the data
+and write it back to google cloud big query.</p>
+<p>The process is divided by below.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Main</dt><dd><p>Entry point for the execution</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Utils</dt><dd><p>Common and reusable functions for orchestration of the project</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dags</dt><dd><p>To divide the workflow via parameters</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Config</dt><dd><p>Configuration files for access etc</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Document</dt><dd><p>For sphinx documentation</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Consolidated</dt><dd><p>Data extraction script, based on the type of process e.g. raw, consolidated or feature</p>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="section" id="method">
+<h2>Method<a class="headerlink" href="#method" title="Permalink to this headline"></a></h2>
+<p>Python has been chosen language to do this process. Code is compliant with PEP 8 guidelines. There are multiple options
+possible for the execution of the project, e.g. dataflow, cloud scheduler (with serverless function). However we have
+chosen databricks as it could be all in one platform to operate the data engineering, machine learning, analytics and much more.
+Also using databricks-spark gives much more parallel computing power to process large volume of data compared with traditional python.
+keeping all this activities in mind we have chosen databricks route.</p>
+</div>
+<div class="section" id="ci-cd">
+<h2>CI-CD<a class="headerlink" href="#ci-cd" title="Permalink to this headline"></a></h2>
+<p>Ideally we would build a CI-CD pipeline to deploy wheel file to databricks dbfs location. The CI-CD pipeline would do
+below activity using google cloud build.</p>
+<ol class="arabic simple">
+<li><p>Install requirements from requirements.txt (located in environment folder)</p></li>
+<li><p>Run pytest - with the aim to have 90% code coverage</p></li>
+<li><p>Build Wheel</p></li>
+<li><p>Deploy Wheel to databricks environment for easy accessibility</p></li>
+</ol>
+<p>Note: This task is still WIP</p>
+</div>
+</div>
+<div class="section" id="end-to-end-flow">
+<h1>End to End Flow<a class="headerlink" href="#end-to-end-flow" title="Permalink to this headline"></a></h1>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../_images/flow.png"><img alt="../../_images/flow.png" src="../../_images/flow.png" style="width: 900px;" /></a>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to project template Technical documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, hardik talati.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

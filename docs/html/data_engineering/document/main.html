@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Main - Execution script &mdash; project template v0.1 documentation</title>
+  <title>Main - Execution script &mdash; Data Extraction GithubAPI v0.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+    <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
@@ -16,7 +16,9 @@
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dags" href="dag.html" />
+    <link rel="prev" title="Utils" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -24,7 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> project template
+            <a href="../../index.html" class="icon icon-home"> Data Extraction GithubAPI
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -34,18 +36,23 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Main - Execution script</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Index:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html#end-to-end-flow">End to End Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main - Execution script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dag.html">Dags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraction.html">Extraction and transformation process</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">project template</a>
+          <a href="../../index.html">Data Extraction GithubAPI</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -63,45 +70,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-src.data_engineering.main.run_data_processing">
-<span id="main-execution-script"></span><h1>Main - Execution script<a class="headerlink" href="#module-src.data_engineering.main.run_data_processing" title="Permalink to this headline"></a></h1>
-<dl class="py function">
+  <div class="section" id="main-execution-script">
+<h1>Main - Execution script<a class="headerlink" href="#main-execution-script" title="Permalink to this headline"></a></h1>
+<p>This is the entry point of the data engineering process. It is capable of executing n number of projects via dag.</p>
+<span class="target" id="module-src.data_engineering.main.run_data_processing"></span><dl class="py function">
 <dt class="sig sig-object py" id="src.data_engineering.main.run_data_processing.run_data_processing">
 <span class="sig-prename descclassname"><span class="pre">src.data_engineering.main.run_data_processing.</span></span><span class="sig-name descname"><span class="pre">run_data_processing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.main.run_data_processing.run_data_processing" title="Permalink to this definition"></a></dt>
 <dd><p>EXECUTION SCRIPT</p>
 <p>This is the entry point of the project, all different dags gets executed from this function.
 Whilst building the pipeline, this script gets copied at shared location in databricks and
-it is called in datafactory jobs with relevant parameters.</p>
-<p>Data is divided in below fashion</p>
-<ul class="simple">
-<li><p>raw - apply schema to files</p></li>
-<li><p>historic - apply schema to files ( one off historic load , e.g. sap bw data)</p></li>
-<li><p>consolidated - makes reusable table with some amount of transformation which can be common among business</p></li>
-<li><p>feature - IPM specific transformation i.e. data that goes into reporting or modelling</p></li>
-</ul>
-<p>Currently it calls below parameters (i.e. different processes)</p>
-<ul class="simple">
-<li><p>Raw manual files</p></li>
-<li><p>Historic layer</p></li>
-<li><p>Daily view consolidated</p></li>
-<li><p>Weekly stock consolidated</p></li>
-<li><p>Capacity control feature</p></li>
-<li><p>Finance planner feature</p></li>
-<li><p>Prophet feature</p></li>
-<li><p>Supply planner consolidated (DOS and actuals)</p></li>
-<li><p>supply planner Feature (DOS and actuals)</p></li>
-</ul>
-<p>All above processes gets called by a function, and written to hive table via the list of tables
-passed from constant files. All hive tables have schema and they get overwritten on every run.</p>
+and it can be scheduled using databricks scheduler. Parameters from this notebook would be passed
+to another runscript to accomodate the dbutils library specific to datbaricks.</p>
+<p>When the script gets executed below steps takes place</p>
+<p>1). Creates dataset (database if it does not exist).
+2). Executes the pipeline or multiple pipelines.
+3). Writes the data to the google big query.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>process_name</strong> – name of the process - i.e. feature layer, consolidated layer etc</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_name</strong> – name of the process - i.e. feature layer, consolidated layer etc. It gets picked up from the dags_config and is passed as a parameter.</p></li>
+<li><p><strong>write_database</strong> – Name of the dataset where it needs to write.</p></li>
+<li><p><strong>environment</strong> – Project ID details.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>This function returns None- as it is executes dag and writes data to</p>
 </dd>
 </dl>
-<p>the hive tables. Further information could be found in the relevant sections.</p>
+<p>the google big query. Further information could be found in the relevant sections.</p>
 </dd></dl>
 
 </div>
@@ -109,12 +105,15 @@ passed from constant files. All hive tables have schema and they get overwritten
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dag.html" class="btn btn-neutral float-right" title="Dags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, hardik talati.</p>
+    <p>&#169; Copyright 2021, hardik talati.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
