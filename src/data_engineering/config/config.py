@@ -1,0 +1,2 @@
+GITHUB_USERNAME = 'hardiktalati'
+GITHUB_TOKEN = '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'
