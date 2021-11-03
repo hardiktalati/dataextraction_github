@@ -1,6 +1,6 @@
 
-Welcome to project template Technical documentation
-==================================================================
+Welcome to Data Extraction using GithubAPI Technical Documentation
+=====================================================================
 
 .. toctree::
    :maxdepth: 2
