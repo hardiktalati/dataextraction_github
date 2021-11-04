@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Data Extraction GithubAPI'
+project = 'Data Extraction GithubAPI & Other Tasks'
 copyright = '2021, hardik talati'
 author = 'hardik talati'
 
