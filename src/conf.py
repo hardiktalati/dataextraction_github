@@ -17,8 +17,8 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'project template'
-copyright = '2020, hardik talati'
+project = 'Data Extraction GithubAPI & Other Tasks'
+copyright = '2021, hardik talati'
 author = 'hardik talati'
 
 # The full version, including alpha/beta/rc tags
