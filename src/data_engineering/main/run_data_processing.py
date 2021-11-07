@@ -9,7 +9,8 @@ def run_data_processing(process_name: str, write_database: str, environment: str
     This is the entry point of the project, all different dags gets executed from this function.
     Whilst building the pipeline, this script gets copied at shared location in databricks and
     and it can be scheduled using databricks scheduler. Parameters from this notebook would be passed
-    to another runscript to accomodate the dbutils library specific to datbaricks.
+    to another runscript to accommodate the dbutils library specific to datbaricks. Argparse can also
+    be used instead of dbutils.
 
     When the script gets executed below steps takes place
 
@@ -41,4 +42,4 @@ if __name__ == "__main__":
     #     "write_database": args.write_database,
     #     "enviornment": args.enviornment}
     # run_data_processing(**rdp_args)
-    run_data_processing("GITHUB_PULL", "github_exercise", 'chrome-ability-329607')
+    run_data_processing(process_name="GITHUB_PULL", write_database="github_exercise", environment='chrome-ability-329607')

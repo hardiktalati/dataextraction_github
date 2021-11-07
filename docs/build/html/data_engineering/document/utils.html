@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utils &mdash; Data Extraction GithubAPI &amp; Other Tasks v0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+    <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Main - Execution script" href="main.html" />
+    <link rel="prev" title="Introduction" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Data Extraction GithubAPI & Other Tasks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Task 1:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html#end-to-end-flow">End to End Flow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main - Execution script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dag.html">Dags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraction.html">Extraction and transformation process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Task 2:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sql.html">Big query Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Task 3:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="system_design.html">System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_design.html#data-modelling">Data Modelling</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Data Extraction GithubAPI & Other Tasks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/data_engineering/document/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="utils">
+<h1>Utils<a class="headerlink" href="#utils" title="Permalink to this headline"></a></h1>
+<p>Utils are reusable code. Most of the functions are used within the main script before executing the data processing and
+extraction part. Idea behind utils function is too build reusable code that can be used as extension in various other
+data engineering projects.</p>
+<span class="target" id="module-src.data_engineering.utils.utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.dataset_exists">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">dataset_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.dataset_exists" title="Permalink to this definition"></a></dt>
+<dd><p>This is a util funciton which gets called in create database function. The job for this function is to check
+if dataset (database) existance. If they exist then nothing happens and if they dont exist create database funciton
+is triggered to create dataset (database)
+:param project: Project ID for authentication and creating dataset.
+:param database: Name of the dataset.
+:return: None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.create_database">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.create_database" title="Permalink to this definition"></a></dt>
+<dd><p>This function creates dataset it is dependent on the dataset_exist function. Based on the dataset_exist this function
+decides to create a dataset(database). This function gets called in main script. This is the first activity that triggers
+as a part of main script.
+:param project: Project ID
+:param dataset_id: Name of the dataset for creation.
+:return: Creates a dataset in relevant project environment.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.upload_df_to_bq">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">upload_df_to_bq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.upload_df_to_bq" title="Permalink to this definition"></a></dt>
+<dd><p>This functions writes the dataframe to google big query. It currently overwrites the table as data is too small.
+Further extension - To create external big query tables and append to the exisitng table in much more manageable SCD method
+:param df:  Dataframe that needs to get written to Big query.
+:param project: Project ID for authentication
+:param bq_table: Table name in Big query
+:return: None - Action is to write the data to big query.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.table_exists">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">table_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.table_exists" title="Permalink to this definition"></a></dt>
+<dd><p>Future Extensions:</p>
+<p>This function will check the table if it exist in big query. It will be used as a part of create_external_tables function.
+:param project: Project ID for authentication.
+:param database: Name of dataset where table needs to be created or checked..
+:param table: Name of the table that needs to be checked if exist of created.
+:return: None - Action for other function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.create_external_tables">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_external_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.create_external_tables" title="Permalink to this definition"></a></dt>
+<dd><p>Future extension:</p>
+<p>This function creates external tables in big query. Before creating table it checks
+if table exist, and in a scenario if it exist then it does not recreate the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> – Schema for creating the table</p></li>
+<li><p><strong>database</strong> – Dataset in big query where table gets stored</p></li>
+<li><p><strong>table_name</strong> – Name of the table also location in cloud storage for storing table</p></li>
+<li><p><strong>file_format</strong> – Format in which data is saved</p></li>
+<li><p><strong>location</strong> – Google cloud storage location</p></li>
+<li><p><strong>project</strong> – Project id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Print statement on if the table has been created or there is no need of creating the table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data_engineering.utils.utils.create_schema">
+<span class="sig-prename descclassname"><span class="pre">src.data_engineering.utils.utils.</span></span><span class="sig-name descname"><span class="pre">create_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary_of_variables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.data_engineering.utils.utils.create_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Future Extension:
+This funciton will create schema for Big query table from a dictionary. It will be used within create_extenral_tables function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dictionary_of_variables</strong> – Dictionary of column that needs to be created with data types and description.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None - Action to create tables as a part of other function create_external_tables</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="main.html" class="btn btn-neutral float-right" title="Main - Execution script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, hardik talati.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

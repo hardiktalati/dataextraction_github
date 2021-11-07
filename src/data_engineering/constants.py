@@ -4,13 +4,9 @@ SPARK = "spark"
 APACHE = "apache"
 TOKEN = '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'
 PROJECT_ID = 'chrome-ability-329607'
-DATABASE= "github_exercise"
-GITHUB_PULL ="github_exercise.github_pull"
+DATABASE = "github_exercise"
+GITHUB_PULL = "github_exercise.github_pull"
 PROJECT_NAME = "github_sample"
-
-
-
-
 
 PULLS_SCHEMA = {'url': 'string', 'id': 'int64', 'node_id': 'string', 'html_url': 'string', 'diff_url': 'string',
                 'patch_url': 'string', 'issue_url': 'string', 'number': 'int64', 'state': 'string', 'locked': 'bool',

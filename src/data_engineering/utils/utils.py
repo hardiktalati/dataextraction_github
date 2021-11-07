@@ -4,7 +4,6 @@ from google.cloud import bigquery
 
 credentials_path = '../config/chrome-ability-329607-a80ecc183be3.json'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
-table_id = 'chrome-ability-329607.temp.temp1'
 
 
 def dataset_exists(project, database):
